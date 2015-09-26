@@ -8,13 +8,12 @@ files = ascii.read('NIRC2_sci_20020_1.txt')
 fileNames = np.array(files['fileNames'])
 targets = np.array(files['target'])
 
-positions = ascii.read('starPositions.txt')
+o = 512
 
 n = np.size(targets)
 for i in range(n):
     if targets[i]!=0:
-        im = fits.getdata('calfits/'+fileNames[i])
-        x, y = positions['x'][i], positions['y'][i]
+        im = fits.getdata('results/'+fileNames[i][:-5]+'.reg.fits')
 
         smooth = intp.RectBivariateSpline(range(1024),range(1024),im)
 
@@ -25,8 +24,8 @@ for i in range(n):
         for r in R:
             for t in theta:
                 trad = np.radians(t)
-                xp = x + r*np.cos(trad)
-                yp = y + r*np.sin(trad)
+                xp = o + r*np.cos(trad)
+                yp = o + r*np.sin(trad)
                 f[r,t] = smooth(yp,xp)
 
         f = np.median(f, axis=1)
@@ -34,7 +33,7 @@ for i in range(n):
         smoothf = intp.interp1d(R,f,bounds_error=False,fill_value=0.0)
         xp, yp = np.arange(1024),np.arange(1024)
         xg, yg = np.meshgrid(xp,yp)
-        rp = np.sqrt((xg-x)**2 + (yg-y)**2)
+        rp = np.sqrt((xg-o)**2 + (yg-o)**2)
 
         imsub = im - smoothf(rp)
 

@@ -21,7 +21,7 @@ for i in range(n):
     
     im = fits.getdata('calfits/'+fileNames[i])
     sim = intp.shift(im,[yref-positions['y'][i],xref-positions['x'][i]])
-    fits.writeto('results/'+filenames[i][:-5]+'.reg.fits'
+    fits.writeto('results/'+filenames[i][:-5]+'.reg.fits',sim)
     hdr = fits.getheader('calfits/'+fileNames[i])
     PA = hdr['PARANG']+hdr['ROTPPOSN']-hdr['EL']-hdr['INSTANGL']
     rim = intp.rotate(sim,-PA,reshape=False)
