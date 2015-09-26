@@ -14,7 +14,7 @@ def findStar(im, (xg, yg)):
     for i in range(-6,+7):
         for j in range(-6,7):
             if (np.sqrt((i)**2+(j)**2)<=6):
-                f = im[xg+i,yg+j]
+                f = im[yg+i,xg+j]
                 tf += f
                 x += f*i
                 y += f*j

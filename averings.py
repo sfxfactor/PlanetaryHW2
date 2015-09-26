@@ -15,7 +15,7 @@ ROXs12 = np.array([])
 n = np.size(targets)
 for i in range(n):
     
-    im = np.transpose(fits.getdata('calfits/'+fileNames[i]))
+    im = fits.getdata('calfits/'+fileNames[i])
     x, y = positions['x'][i], positions['y'][i]
 
     smooth = intp.RectBivariateSpline(range(1024),range(1024),im)
@@ -29,7 +29,7 @@ for i in range(n):
             trad = np.radians(t)
             xp = x + r*np.cos(trad)
             yp = y + r*np.sin(trad)
-            f[r,t] = smooth(xp,yp)
+            f[r,t] = smooth(yp,xp)
 
     f = np.median(f, axis=1)
     
@@ -38,9 +38,9 @@ for i in range(n):
     xg, yg = np.meshgrid(xp,yp)
     rp = np.sqrt((xg-x)**2 + (yg-y)**2)
 
-    imsub = im - smoothf(np.transpose(rp))
+    imsub = im - smoothf(rp)
 
-    fits.writeto('calfits/'+fileNames[i][:-5]+'.ringsub.fits',np.transpose(imsub))
+    fits.writeto('calfits/'+fileNames[i][:-5]+'.ringsub.fits',imsub)
 
     percent = float(i) / n
     hashes = '#' * int(round(percent * 20))
