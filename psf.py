@@ -4,6 +4,7 @@ from astropy.io import fits
 from astropy.io import ascii
 import sys
 
+print 'registering and stacking images'
 
 files = ascii.read('NIRC2_sci_20020_1.txt')
 fileNames = np.array(files['fileNames'])
@@ -46,6 +47,8 @@ for i in range(n):
     sys.stdout.write("\rPercent: [{0}] {1}%".format(hashes + spaces, int(round(percent * 100))))
     sys.stdout.flush()
 
+
+sys.stdout.write("\n")
 
 sum42B = np.sum(ROXs42B,axis=0)
 fits.writeto('results/ROXs42Bsum.fits',sum42B)

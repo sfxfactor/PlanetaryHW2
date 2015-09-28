@@ -2,6 +2,7 @@ from astropy.io import fits
 from astropy.io import ascii
 import numpy as np
 
+print 'finding stars'
 
 files = ascii.read('NIRC2_sci_20020_1.txt')
 files = np.array(files['fileNames'])

@@ -4,6 +4,8 @@ from astropy.io import fits
 from astropy.io import ascii
 import sys
 
+print 'subtracting average radial profile'
+
 files = ascii.read('NIRC2_sci_20020_1.txt')
 fileNames = np.array(files['fileNames'])
 targets = np.array(files['target'])
@@ -19,8 +21,8 @@ for i in range(n):
 
         R = np.arange(300)
         theta = np.arange(360)
-        f = np.zeros((300,360))
 
+        f = np.zeros((300,360))
         for r in R:
             for t in theta:
                 trad = np.radians(t)
@@ -44,3 +46,4 @@ for i in range(n):
         spaces = ' ' * (20 - len(hashes))
         sys.stdout.write("\rPercent: [{0}] {1}%".format(hashes + spaces, int(round(percent * 100))))
         sys.stdout.flush()
+sys.stdout.write("\n")
