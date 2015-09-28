@@ -39,7 +39,7 @@ for i in range(n):
 
         for j in range(n):
             if (targets[i]==1 and targets[j]==2) or (targets[i]==2 and targets[j]==1):
-                tim = fits.getdata('results/'+fileNames[i][:-5]+'.reg.fits')
+                tim = fits.getdata('results/'+fileNames[j][:-5]+'.reg.fits')
                 ss[j] = findRatio(im,tim,mask)
                 Chi[j] = np.sum((im - ss[j]*tim)**2) ### what to use for sigma???
                 percent1 = float(i) / n

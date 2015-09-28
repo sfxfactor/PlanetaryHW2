@@ -4,7 +4,7 @@ from astropy.io import fits
 from astropy.io import ascii
 import sys
 
-print 'subtracting average radial profile'
+print 'subtracting average radial profile, this may take a while'
 
 files = ascii.read('NIRC2_sci_20020_1.txt')
 fileNames = np.array(files['fileNames'])
