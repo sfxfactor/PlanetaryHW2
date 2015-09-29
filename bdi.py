@@ -3,6 +3,7 @@ import scipy.interpolate as intp
 from astropy.io import fits
 from astropy.io import ascii
 import sys
+import imageSubs as iS
 
 print 'matching psf (BDI?)'
 
@@ -10,8 +11,8 @@ files = ascii.read('NIRC2_sci_20020_1.txt')
 fileNames = np.array(files['fileNames'])
 targets = np.array(files['target'])
 
-ROXs42B = fits.getdata('results/ROXs42Bmed.fits')
-ROXs12 = fits.getdata('results/ROXs12med.fits')
+ROXs42B = fits.getdata('results/target1med.fits')
+ROXs12 = fits.getdata('results/target2med.fits')
 o = 512 #psf center (origin)
 
 n = np.size(targets)
@@ -56,6 +57,12 @@ for i in range(n):
         
         sim = im - ss[best]*fits.getdata('results/'+fileNames[best][:-5]+'.reg.fits')
         fits.writeto('results/'+fileNames[i][:-5]+'.bdi.fits',sim)
-
-
 sys.stdout.write("\n")
+
+#register bdi images
+positions = ascii.read('starPositions.txt')
+positions['x'] = np.ones(n)*512
+positions['y'] = np.ones(n)*512
+xref, yref = 512., 512.
+
+iS.register(2,'results/',fileNames,'bdi.', targets, positions, (xref,yref))

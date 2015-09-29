@@ -3,8 +3,9 @@ import scipy.interpolate as intp
 from astropy.io import fits
 from astropy.io import ascii
 import sys
+import imageSubs as iS
 
-print 'subtracting average radial profile, this may take a while'
+print 'subtracting average radial profile (this may take a while)'
 
 files = ascii.read('NIRC2_sci_20020_1.txt')
 fileNames = np.array(files['fileNames'])
@@ -16,8 +17,7 @@ n = np.size(targets)
 for i in range(n):
     if targets[i]!=0:
         im = fits.getdata('results/'+fileNames[i][:-5]+'.reg.fits')
-
-        smooth = intp.RectBivariateSpline(range(1024),range(1024),im)
+        smoothim = intp.RectBivariateSpline(range(1024),range(1024),im)
 
         R = np.arange(300)
         theta = np.arange(360)
@@ -28,10 +28,10 @@ for i in range(n):
                 trad = np.radians(t)
                 xp = o + r*np.cos(trad)
                 yp = o + r*np.sin(trad)
-                f[r,t] = smooth(yp,xp)
+                f[r,t] = smoothim(yp,xp)
 
         f = np.median(f, axis=1)
-        
+
         smoothf = intp.interp1d(R,f,bounds_error=False,fill_value=0.0)
         xp, yp = np.arange(1024),np.arange(1024)
         xg, yg = np.meshgrid(xp,yp)
@@ -47,3 +47,11 @@ for i in range(n):
         sys.stdout.write("\rPercent: [{0}] {1}%".format(hashes + spaces, int(round(percent * 100))))
         sys.stdout.flush()
 sys.stdout.write("\n")
+
+#register images
+positions = ascii.read('starPositions.txt')
+positions['x'] = np.ones(n)*512
+positions['y'] = np.ones(n)*512
+xref, yref = 512., 512.
+
+iS.register(2,'results/',fileNames,'ringsub.', targets, positions, (xref,yref))
