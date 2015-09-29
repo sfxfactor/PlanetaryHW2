@@ -1,4 +1,4 @@
-# PlanetaryHW1
+# PlanetaryHW2
 A git repo for Planetary Astrophysics HW2
 
 To generate the pdf's run:
@@ -7,8 +7,10 @@ source exeCode.sh
 ```
 This script will create a directory called `results/` and run all the code for the homework.
 
-NOTE: I manually went through each image and tagged it as an allignment image, ROXs42B or ROXs12; this corresponds to the target column in the text file `NIRC2_sci_20020_1.txt` (0, 1, or 2 respectively) which also contains a list of all the file names. 
+#Notes
+I manually went through each image and tagged it as an allignment image, ROXs42B or ROXs12; this corresponds to the target column in the text file `NIRC2_sci_20020_1.txt` (0, 1, or 2 respectively) which also contains a list of all the file names. 
 
+#Code corresponding to each "Part"
 Part 1: data is in `calfits/`.
 
 Part 2: this code is contained in the `findStar` method in `imageSubs.py` and is executed in `findStars.py`. This code outputs the text file `starPositions.txt` which contains the name of each file and the position of the star (x, y).
