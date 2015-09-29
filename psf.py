@@ -5,7 +5,6 @@ from astropy.io import ascii
 import sys
 import imageSubs as iS
 
-print 'registering and stacking images'
 
 files = ascii.read('NIRC2_sci_20020_1.txt')
 fileNames = np.array(files['fileNames'])

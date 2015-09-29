@@ -5,3 +5,5 @@ python psf.py
 python averings.py
 python adi.py
 python bdi.py
+python findObjects.py
+echo 'done!'

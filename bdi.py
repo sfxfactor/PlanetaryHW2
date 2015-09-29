@@ -58,6 +58,7 @@ for i in range(n):
         sim = im - ss[best]*fits.getdata('results/'+fileNames[best][:-5]+'.reg.fits')
         fits.writeto('results/'+fileNames[i][:-5]+'.bdi.fits',sim)
 sys.stdout.write("\n")
+f.close()
 
 #register bdi images
 positions = ascii.read('starPositions.txt')

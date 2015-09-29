@@ -20,7 +20,7 @@ def findStar(im, (xg, yg),r):
     return (x+xg, y+yg)
 
 def register(ntargets, directory, fileNames, extraTxt, targets, positions, (xref,yref)):
-    print 'registering '+extraTxt
+    print 'registering and stacking '+extraTxt
     n = np.size(targets)
     for t in range(1,ntargets+1):
         reg = np.array([])
