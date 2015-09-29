@@ -7,11 +7,11 @@ To generate the pdf's run:
 source exeCode.sh
 ```
 
-Part 1: data is in `calfits`.
+Part 1: data is in `calfits/`.
 
 Part 2: this code is contained in the `findStar` method in `imageSubs.py` and is executed in `findStars.py`.
 
-Part 3 and 4: this code is contained in the `register` method in `imageSubs.py` and executed in `psf.py`. This method shifts and rotates the images as well as creating sum and median images of the result.
+Part 3 and 4: this code is contained in the `register` method in `imageSubs.py` and executed in `psf.py`. This method shifts and rotates the images as well as creating sum and median images of the result. All furthur code uses the 'registered' images such that the location of the star is in the center of the image (512, 512).
 
 Part 5: this code is contained and executed in `averings.py`.
 
