@@ -7,6 +7,7 @@ import imageSubs as iS
 
 print 'subtracting psf (ADI)'
 
+#load file names, target list and median psf
 files = ascii.read('NIRC2_sci_20020_1.txt')
 fileNames = np.array(files['fileNames'])
 targets = np.array(files['target'])
@@ -15,7 +16,7 @@ ROXs42B = fits.getdata('results/target1med.fits')
 ROXs12 = fits.getdata('results/target2med.fits')
 o = 512 #psf center (origin)
 
-#create mask
+#create mask- 1's in a ring from r=10-30 pixels, 0 otherwise
 mask = np.zeros((1024,1024))
 for i in range(1024):
     for j in range(1024):
@@ -24,18 +25,22 @@ for i in range(1024):
 
 n = np.size(targets)
 for i in range(n):
+    #exclude acquisition images
     if targets[i]!=0:
         im = fits.getdata('results/'+fileNames[i][:-5]+'.reg.fits')
 
+        #load appropriate psf
         if targets[i]==1:
             psf = ROXs42B
         if targets[i]==2:
             psf = ROXs12
+        #find scaling ratio, subtract and output image
         s = iS.findRatio(im,psf,mask)#(o,o),15,15)
         im = im - s*psf
         fits.writeto('results/'+fileNames[i][:-5]+'.adi.fits',im)
 
 
+    #progress bar
     percent = float(i) / n
     hashes = '#' * int(round(percent * 20))
     spaces = ' ' * (20 - len(hashes))
@@ -43,7 +48,7 @@ for i in range(n):
     sys.stdout.flush()
 sys.stdout.write("\n")
 
-#register adi images
+#register and stack adi images
 positions = ascii.read('starPositions.txt')
 positions['x'] = np.ones(n)*512
 positions['y'] = np.ones(n)*512

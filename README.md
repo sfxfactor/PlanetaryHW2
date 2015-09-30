@@ -23,4 +23,4 @@ Part 6: this code is contained and executed in `adi.py`.
 
 Part 7: this code is contained and executed in `bdi.py` and outputs the text file `bestFitPSF.txt` which contains the name of the best fit psf for each image.
 
-Part 8: this code is contained and executed in `findObjects.py` and outputs the text file `objectPositions.txt` which contains the locations of each object as well as the relative astrometry (r, PA).
+Part 8: this code uses the `findStar` method in imageSubs and is executed in `findObjects.py`. It outputs the text file `objectPositions.txt` which contains the locations of each object as well as the relative astrometry (r, PA).

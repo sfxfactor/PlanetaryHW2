@@ -6,15 +6,19 @@ import sys
 import imageSubs as iS
 
 
+#load file names, target list and star positions
 files = ascii.read('NIRC2_sci_20020_1.txt')
 fileNames = np.array(files['fileNames'])
 targets = np.array(files['target'])
 
 positions = ascii.read('starPositions.txt')
+#stack all images so the star is in the center
 xref, yref = 512., 512.
 
+#register, rotate and stack images
 iS.register(2, 'calfits/', fileNames, '', targets, positions, (xref,yref))
 
+##old code moved to imageSubs
 #ROXs42B = np.array([])
 #ROXs42Br = np.array([])
 #ROXs12 = np.array([])
