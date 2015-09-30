@@ -24,8 +24,10 @@ for i in range(n):
 
         #prepare f(r,theta) for radial average
         f = np.zeros((300,360))
-        for r in range(300):
-            for t in range(360):
+        R = np.arange(300)
+        theta = np.arange(360)
+        for r in R:
+            for t in theta:
                 trad = np.radians(t)
                 xp = o + r*np.cos(trad)
                 yp = o + r*np.sin(trad)
