@@ -26,6 +26,7 @@ I manually went through each image and tagged it as an acquisition image, ROXs42
 **Part 8:** this code uses the `findStar` method in imageSubs and is executed in `findObjects.py`. It outputs the text file `objectPositions.txt` which contains the locations of each object as well as the relative astrometry (r, PA).
 
 **Output Files:** 
+
 | Part | Contents | file name/location |
 |---|-------------|---------------------|
 | 2 | x-y coordinates of the stars | starPositions.txt |
