@@ -1,4 +1,4 @@
-rm -rf results
+rm results/*
 mkdir results
 python findStar.py
 python psf.py
