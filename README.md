@@ -27,7 +27,7 @@ I manually went through each image and tagged it as an acquisition image, ROXs42
 
 **Output Files:** 
 Part | Contents | file name/location
-------------------------------------
+--|-------------|---------------------
 2 | x-y coordinates of the stars | starPositions.txt
 4 | sum/median registered images | results/target[1,2][sum,med].fits
 4 | sum/median rotated images | results/target[1,2]rot[sum,med].fits
