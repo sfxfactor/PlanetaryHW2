@@ -35,7 +35,7 @@ for i in range(n):
 
         #median over all theta for every r and generate a non-discrete function
         f = np.median(f, axis=1)
-        smoothf = intp.interp1d(R,f,bounds_error=False,fill_value=0.0)
+        smoothf = intp.interp1d(R,f,bounds_error=False,fill_value=f[299])
 
         #generate the r coordinate of every point in the image
         xp, yp = np.arange(1024),np.arange(1024)

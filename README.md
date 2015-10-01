@@ -1,5 +1,5 @@
 # PlanetaryHW2
-A git repo for Planetary Astrophysics HW2
+A git repo for Planetary Astrophysics HW2 (requires `numpy`, `scipy`, and `astropy`)
 
 To generate the pdf's run:
 ```bash

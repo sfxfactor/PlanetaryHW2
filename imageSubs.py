@@ -2,6 +2,7 @@ from astropy.io import fits
 from astropy.io import ascii
 import numpy as np
 from scipy.ndimage import interpolation as intp
+import scipy.interpolate as intp2
 import sys
 
 
@@ -134,3 +135,47 @@ def findRatio(im,psf,mask): #(xc,yc),r,d):
     #return np.median(ratios)
     ratio = (im/psf)*mask
     return np.median(ratio[np.where(mask!=0)])
+
+def calcNoiseProfile(im):
+    '''
+    Finds the noise proflie of an image by finding the stdev of the counts in 
+    concentric rings around the center of the image. This only works for 
+    "registered" images.
+
+    :param im:
+    the image to find the noise profile of
+    '''
+
+    #find the shape and center of the image (assumes a square image)
+    (xs,ys) = np.shape(im)
+    ox = xs/2
+
+    smoothim = intp2.RectBivariateSpline(range(xs),range(ys),im)
+
+    #prepare f(r,theta) for radial average
+    R = np.arange(o)
+    theta = np.arange(360)
+    f = np.zeros((o,360))
+    for r in R:
+        for t in theta:
+            trad = np.radians(t)
+            xp = o + r*np.cos(trad)
+            yp = o + r*np.sin(trad)
+            f[r,t] = smoothim(yp,xp)
+
+    #stdev over all theta for every r and generate a non-discrete function
+    f = np.std(f, axis=1)
+    smoothf = intp2.interp1d(R,f,bounds_error=False,fill_value=f[o-1])
+
+    #generate the r coordinate of every point in the image
+    xp, yp = np.arange(xs),np.arange(ys)
+    xg, yg = np.meshgrid(xp,yp)
+    rp = np.sqrt((xg-o)**2 + (yg-o)**2)
+
+    #generate the noise profile and correct any places where it is 0 (usually 
+    # at the center of the image where there is only one point so stdev=0)
+    noise = smoothf(rp)
+    zy, zx = np.where(noise==0)[0]+1, np.where(noise==0)[1]+1
+    noise[np.where(noise==0)] = noise[zy,zx]
+
+    return noise

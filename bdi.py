@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import scipy.interpolate as intp
 from astropy.io import fits
 from astropy.io import ascii
@@ -35,13 +36,16 @@ for i in range(n):
         Chi = np.ones(n)*np.inf
         ss = np.zeros(n)
 
+        #calculate noise in the image
+        sig = iS.calcNoiseProfile(im)
+
         for j in range(n):
             #loop over images of the other target
             if (targets[i]==1 and targets[j]==2) or (targets[i]==2 and targets[j]==1):
                 tim = fits.getdata('results/'+fileNames[j][:-5]+'.reg.fits')
                 #find scaling ratio and chi^2
-                ss[j] = findRatio(im,tim,mask)
-                Chi[j] = np.sum((im - ss[j]*tim)**2) ### what to use for sigma???
+                ss[j] = iS.findRatio(im,tim,mask)
+                Chi[j] = np.sum(((im - ss[j]*tim)/sig)**2) ### what to use for sigma???
                 #progress bar
                 percent1 = float(i) / n
                 hashes1 = '#' * int(round(percent1 * 20))
