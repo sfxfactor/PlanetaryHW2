@@ -1,5 +1,5 @@
-rm results/*
 mkdir results
+rm results/*
 python findStar.py
 python psf.py
 python averings.py

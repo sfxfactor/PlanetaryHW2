@@ -20,7 +20,7 @@ ob12 = [(486,690)]
 
 #prepare output file
 f = open('objectPositions.txt','w')
-f.write('file\tx1\ty1\tx2\ty2\tr1\tPA1\tr2\tPA2\n')
+f.write('file\tx1[pix]\ty1[pix]\tx2[pix]\ty2[pix]\tr1[arcsec]\tPA1[deg]\tr2[arcsec]\tPA2[deg]\n')
 
 for i in ROXs42B:
     im = fits.getdata(i)
@@ -39,7 +39,6 @@ for i in ROXs12:
     x, y = iS.findStar(im, ob12[0], 6)
     r = s*np.sqrt((x-512.)**2+(y-512.)**2)
     PA = np.degrees(np.arctan2(-(x-512.),(y-512.)))
-    f.write(i+'\t'+str(x)+'\t'+str(y)+'\t0\t0'+str(r)+'\t'+str(PA)+'\t0\t0\n')
+    f.write(i+'\t'+str(x)+'\t'+str(y)+'\t0\t0\t'+str(r)+'\t'+str(PA)+'\t0\t0\n')
 
 f.close()
-
