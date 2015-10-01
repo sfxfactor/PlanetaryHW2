@@ -28,7 +28,7 @@ I manually went through each image and tagged it as an acquisition image, ROXs42
 #Output Files:#
 Target 1 = ROXs 42B, Target 2 = ROXs 12.
 
-The following table gives the location of each relavent file *after running the code*. I have coppied all relavent output files to `finalResults/` so that if you run the code and something fails you still have a copy of the results. 
+The following table gives the location of each relevent file *after running the code*. I have coppied all relevent output files to `finalResults/` so that if you run the code and something fails you still have a copy of the results. 
 
 | Part | Contents | file name/location |
 |---|-------------|---------------------|
