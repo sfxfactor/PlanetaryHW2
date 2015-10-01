@@ -26,13 +26,13 @@ I manually went through each image and tagged it as an acquisition image, ROXs42
 **Part 8:** this code uses the `findStar` method in imageSubs and is executed in `findObjects.py`. It outputs the text file `objectPositions.txt` which contains the locations of each object as well as the relative astrometry (r, PA).
 
 **Output Files:** 
-Part | Contents | file name/location
---|-------------|---------------------
-2 | x-y coordinates of the stars | starPositions.txt
-4 | sum/median registered images | results/target[1,2][sum,med].fits
-4 | sum/median rotated images | results/target[1,2]rot[sum,med].fits
-5 | sum/median rotated radially subtracted | results/ringsub.target[1,2]rot[med,sum].fits
-6 | sum/median rotated adi images | results/adi.target[1,2]rot[med,sum].fits
-7 | sum/median rotated bdi images | results/bdi.target[1,2]rot[med,sum].fits
-7 | table of best fit images | bestFitPSF.txt
-8 | table of positions of objects of interest | objectPositions.txt
+| Part | Contents | file name/location |
+|---|-------------|---------------------|
+| 2 | x-y coordinates of the stars | starPositions.txt |
+| 4 | sum/median registered images | results/target[1,2][sum,med].fits |
+| 4 | sum/median rotated images | results/target[1,2]rot[sum,med].fits |
+| 5 | sum/median rotated radially subtracted | results/ringsub.target[1,2]rot[med,sum].fits |
+| 6 | sum/median rotated adi images | results/adi.target[1,2]rot[med,sum].fits |
+| 7 | sum/median rotated bdi images | results/bdi.target[1,2]rot[med,sum].fits |
+| 7 | table of best fit images | bestFitPSF.txt |
+| 8 | table of positions of objects of interest | objectPositions.txt |
