@@ -153,24 +153,24 @@ def calcNoiseProfile(im):
     smoothim = intp2.RectBivariateSpline(range(xs),range(ys),im)
 
     #prepare f(r,theta) for radial average
-    R = np.arange(o)
+    R = np.arange(ox)
     theta = np.arange(360)
-    f = np.zeros((o,360))
+    f = np.zeros((ox,360))
     for r in R:
         for t in theta:
             trad = np.radians(t)
-            xp = o + r*np.cos(trad)
-            yp = o + r*np.sin(trad)
+            xp = ox + r*np.cos(trad)
+            yp = ox + r*np.sin(trad)
             f[r,t] = smoothim(yp,xp)
 
     #stdev over all theta for every r and generate a non-discrete function
     f = np.std(f, axis=1)
-    smoothf = intp2.interp1d(R,f,bounds_error=False,fill_value=f[o-1])
+    smoothf = intp2.interp1d(R,f,bounds_error=False,fill_value=f[ox-1])
 
     #generate the r coordinate of every point in the image
     xp, yp = np.arange(xs),np.arange(ys)
     xg, yg = np.meshgrid(xp,yp)
-    rp = np.sqrt((xg-o)**2 + (yg-o)**2)
+    rp = np.sqrt((xg-ox)**2 + (yg-ox)**2)
 
     #generate the noise profile and correct any places where it is 0 (usually 
     # at the center of the image where there is only one point so stdev=0)

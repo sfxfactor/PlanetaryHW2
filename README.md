@@ -3,9 +3,9 @@ A git repo for Planetary Astrophysics HW2 (requires `numpy`, `scipy`, and `astro
 
 To generate the pdf's run:
 ```bash
-source exeCode.sh 2>stderr.out
+source exeCode.sh
 ```
-This script will create a directory called `results/` and run all the code for the homework. Redirecting will clean up the output and put all warnings/errors in stderr.out
+This script will create a directory called `results/` and run all the code for the homework.
 
 #Notes
 I manually went through each image and tagged it as an acquisition image, ROXs42B or ROXs12; this corresponds to the values (0, 1, or 2 respectively) in the 'target' column in the text file `NIRC2_sci_20020_1.txt` which also contains a list of all the file names. 
